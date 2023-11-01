@@ -74,6 +74,7 @@ namespace Catalog.API.Controllers
             return Ok(items);
         }
 
+        [Route("[action]", Name = "CreateProduct")]
         [HttpPost]
         [ProducesResponseType(typeof(Products), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Products>> CreateProduct([FromBody] Products product)
@@ -90,7 +91,8 @@ namespace Catalog.API.Controllers
             return Ok(await _productRepository.UpdateProduct(product));
         }
 
-        [HttpDelete("{id:length(24)}", Name = "DeleteProduct")]
+        [Route("[action]/{id:length(24)}", Name = "DeleteProductById")]
+        [HttpDelete]
         [ProducesResponseType(typeof(Products), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> DeleteProductById(string id)
         {
